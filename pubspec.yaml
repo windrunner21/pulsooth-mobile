@@ -53,6 +53,7 @@ flutter:
     - lib/assets/bottomleft.png
     - lib/assets/bottomright.png
     - lib/assets/test.png
+    - lib/assets/test2.jpg
     - lib/assets/iphone12.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

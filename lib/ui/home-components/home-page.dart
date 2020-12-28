@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pulsooth_mobile/ui/home-components/dashboard-page.dart';
 import 'package:pulsooth_mobile/ui/home-components/products-page.dart';
 import 'package:pulsooth_mobile/ui/home-components/profile-page.dart';
+import 'package:pulsooth_mobile/ui/product-components/bag-page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -105,8 +106,12 @@ class _HomePageState extends State<HomePage>
               padding: EdgeInsets.only(right: 15),
               child: IconButton(
                 onPressed: () {
-                  //   Navigator.push(context,
-                  //       MaterialPageRoute(builder: (context) => ShoppingPage()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BagPage(),
+                    ),
+                  );
                 },
                 icon: Icon(
                   SimpleLineIcons.bag,

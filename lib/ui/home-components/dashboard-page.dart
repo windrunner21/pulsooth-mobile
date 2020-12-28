@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pulsooth_mobile/ui/product-components/product-page.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -84,7 +85,12 @@ class _DashboardPageState extends State<DashboardPage> {
                               ),
                             ),
                             onTap: () {
-                              // TODO
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductPage(),
+                                ),
+                              );
                             },
                           ),
                         ),
@@ -132,12 +138,13 @@ class _DashboardPageState extends State<DashboardPage> {
                       child: Row(
                         children: [
                           Expanded(
-                              child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Image(
-                              image: AssetImage('lib/assets/iphone12.png'),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Image(
+                                image: AssetImage('lib/assets/iphone12.png'),
+                              ),
                             ),
-                          )),
+                          ),
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 10),
                             color: Colors.grey.withOpacity(0.4),
