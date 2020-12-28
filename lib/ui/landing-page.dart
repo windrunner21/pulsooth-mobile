@@ -68,7 +68,7 @@ class _LandingPageState extends State<LandingPage> {
                         style: GoogleFonts.bungeeShade(
                           textStyle: TextStyle(
                             color: Colors.black,
-                            fontSize: 28,
+                            fontSize: 27,
                           ),
                         ),
                       ),

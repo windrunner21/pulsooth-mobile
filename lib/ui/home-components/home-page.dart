@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   // icons
-  Icon homeIcon = Icon(SimpleLineIcons.layers);
+  Icon homeIcon = Icon(SimpleLineIcons.grid);
   Icon samplesIcon = Icon(SimpleLineIcons.basket);
   Icon profileIcon = Icon(SimpleLineIcons.user);
 
