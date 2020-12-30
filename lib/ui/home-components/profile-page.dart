@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pulsooth_mobile/ui/profile-components/contact-delivery-page.dart';
 
 import 'package:pulsooth_mobile/ui/profile-components/my-orders-page.dart';
 
@@ -97,7 +98,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: EdgeInsets.only(bottom: 10),
                         child: ListTile(
                           onTap: () {
-                            print('y');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ContactDeliveryPage(),
+                              ),
+                            );
                           },
                           leading: Padding(
                             padding: EdgeInsets.only(left: 10),
