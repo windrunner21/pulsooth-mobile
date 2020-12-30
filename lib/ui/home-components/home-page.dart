@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage>
   // boolean for extending body behind appbar
   bool _shouldBeExtended = true;
   String _title = '';
+  Color titleColor = Colors.white;
   Color bagColor = Colors.white;
   Color backgroundColor = Colors.transparent;
 
@@ -55,6 +56,7 @@ class _HomePageState extends State<HomePage>
             _shouldBeExtended = false;
             bagColor = Colors.black;
             _title = 'Products in Pulsooth';
+            titleColor = Colors.black;
             backgroundColor = Colors.white;
             homeIcon = Icon(SimpleLineIcons.layers);
             samplesIcon = Icon(SimpleLineIcons.basket_loaded);
@@ -65,7 +67,8 @@ class _HomePageState extends State<HomePage>
           setState(() {
             _shouldBeExtended = true;
             bagColor = Colors.white;
-            _title = '';
+            _title = 'Imran Hajiyev';
+            titleColor = Colors.white;
             backgroundColor = Colors.transparent;
             homeIcon = Icon(SimpleLineIcons.layers);
             samplesIcon = Icon(SimpleLineIcons.basket);
@@ -95,7 +98,7 @@ class _HomePageState extends State<HomePage>
             _title,
             style: GoogleFonts.exo2(
               textStyle:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                  TextStyle(color: titleColor, fontWeight: FontWeight.bold),
             ),
           ),
           backgroundColor: backgroundColor,
