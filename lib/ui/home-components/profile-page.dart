@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pulsooth_mobile/classes/custom-dialog.dart';
+import 'package:pulsooth_mobile/ui/profile-components/about-me-page.dart';
 import 'package:pulsooth_mobile/ui/profile-components/contact-delivery-page.dart';
-
 import 'package:pulsooth_mobile/ui/profile-components/my-orders-page.dart';
+import 'package:pulsooth_mobile/ui/profile-components/news-page.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -147,7 +150,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: EdgeInsets.only(top: 10),
                         child: ListTile(
                           onTap: () {
-                            print('z');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AboutMePage(),
+                              ),
+                            );
                           },
                           leading: Padding(
                             padding: EdgeInsets.only(left: 10),
@@ -177,7 +185,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       ListTile(
                         onTap: () {
-                          print('xx');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NewsPage(),
+                            ),
+                          );
                         },
                         leading: Padding(
                           padding: EdgeInsets.only(left: 10),
@@ -208,7 +221,14 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: EdgeInsets.only(bottom: 10),
                         child: ListTile(
                           onTap: () {
-                            print('zz');
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CustomDialogBox(
+                                    title: "Change App Language",
+                                    text: "OK",
+                                  );
+                                });
                           },
                           leading: Padding(
                             padding: EdgeInsets.only(left: 10),
@@ -252,7 +272,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     padding: EdgeInsets.only(top: 10, bottom: 10),
                     child: ListTile(
                       onTap: () {
-                        print('zxx');
+                        print('signedout');
                       },
                       leading: Padding(
                         padding: EdgeInsets.only(left: 10),

@@ -75,7 +75,7 @@ class _ContactDeliveryPageState extends State<ContactDeliveryPage> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Colors.white, //change your color here
+          color: Colors.white,
         ),
         title: Text(
           'Contact & Delivery',
