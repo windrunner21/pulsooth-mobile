@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "185122196590",
+    "firebase_url": "https://pulsooth.firebaseio.com",
+    "project_id": "pulsooth",
+    "storage_bucket": "pulsooth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185122196590:android:66865f60cb35b3eea1ea7f",
+        "android_client_info": {
+          "package_name": "com.inkindustries.pulsooth_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185122196590-vlm814lll6427ea7u60uuhaan397orta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkHD0_dEod9niRhsfe7VDKi6Xk_1L76K8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185122196590-vlm814lll6427ea7u60uuhaan397orta.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "185122196590-h5kvh5v40ni65bmf60e8tmfl59a0or57.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pulsoothCourier"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
