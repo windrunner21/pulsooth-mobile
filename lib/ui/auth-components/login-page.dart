@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pulsooth_mobile/ui/auth-components/signup-page.dart';
 import 'package:pulsooth_mobile/ui/home-components/home-page.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class SignInPage extends StatefulWidget {
   @override
@@ -8,6 +11,8 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  // scaffold key
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   // key to check the sign in form
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   FocusNode emailFocusNode;
@@ -45,6 +50,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Color(0xFFF6F6F9),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -162,12 +168,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomePage(),
-                              ),
-                            );
+                            _signInWithEmailAndPassword();
                           }
                         },
                         child: Text(
@@ -207,5 +208,34 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ),
     );
+  }
+
+  void _signInWithEmailAndPassword() async {
+    try {
+      final User user = (await _auth.signInWithEmailAndPassword(
+        email: email.text,
+        password: password.text,
+      ))
+          .user;
+
+      _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text("${user.email} signed in"),
+        ),
+      );
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
+    } catch (e) {
+      _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text("Failed to sign in via email & password"),
+        ),
+      );
+    }
   }
 }

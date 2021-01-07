@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -6,6 +7,8 @@ import 'package:pulsooth_mobile/ui/profile-components/about-me-page.dart';
 import 'package:pulsooth_mobile/ui/profile-components/contact-delivery-page.dart';
 import 'package:pulsooth_mobile/ui/profile-components/my-orders-page.dart';
 import 'package:pulsooth_mobile/ui/profile-components/news-page.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -271,8 +274,25 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Padding(
                     padding: EdgeInsets.only(top: 10, bottom: 10),
                     child: ListTile(
-                      onTap: () {
-                        print('signedout');
+                      onTap: () async {
+                        final User user = _auth.currentUser;
+                        if (user == null) {
+                          Scaffold.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('No one has signed in.'),
+                            ),
+                          );
+                          return;
+                        }
+                        _signOut();
+                        final String uid = user.uid;
+                        Scaffold.of(context).showSnackBar(
+                          SnackBar(
+                            content:
+                                Text(uid + ' has successfully signed out.'),
+                          ),
+                        );
+                        Navigator.pop(context);
                       },
                       leading: Padding(
                         padding: EdgeInsets.only(left: 10),
@@ -303,6 +323,10 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
     );
+  }
+
+  void _signOut() async {
+    await _auth.signOut();
   }
 }
 
