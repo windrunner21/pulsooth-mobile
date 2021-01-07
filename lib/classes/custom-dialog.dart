@@ -69,6 +69,10 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                     Divider(color: Colors.grey[400]),
                     ListTile(
                       contentPadding: EdgeInsets.all(0),
+                      leading: Image(
+                        image: AssetImage('lib/assets/aze.png'),
+                        height: 30,
+                      ),
                       title: Text('Azerbaijani'),
                       trailing: CupertinoSwitch(
                         activeColor: Color(0xFF5B70D9),
@@ -98,6 +102,10 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                     Divider(color: Colors.grey[400]),
                     ListTile(
                       contentPadding: EdgeInsets.all(0),
+                      leading: Image(
+                        image: AssetImage('lib/assets/eng.png'),
+                        height: 30,
+                      ),
                       title: Text('English'),
                       trailing: CupertinoSwitch(
                         activeColor: Color(0xFF5B70D9),
@@ -127,6 +135,10 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                     Divider(color: Colors.grey[400]),
                     ListTile(
                       contentPadding: EdgeInsets.all(0),
+                      leading: Image(
+                        image: AssetImage('lib/assets/ru.png'),
+                        height: 30,
+                      ),
                       title: Text('Russian'),
                       trailing: CupertinoSwitch(
                         activeColor: Color(0xFF5B70D9),
@@ -182,7 +194,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             radius: avatarRadius,
             child: ClipRRect(
               borderRadius: BorderRadius.all(
-                Radius.circular(40),
+                Radius.circular(100),
               ),
               child: Image.asset("lib/assets/test4.png"),
             ),

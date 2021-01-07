@@ -59,7 +59,11 @@ flutter:
     - lib/assets/test2.jpg
     - lib/assets/test3.png
     - lib/assets/test4.png
+    - lib/assets/test5.jpg
     - lib/assets/iphone12.png
+    - lib/assets/aze.png
+    - lib/assets/eng.png
+    - lib/assets/ru.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
