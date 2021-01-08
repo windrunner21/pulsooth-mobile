@@ -225,13 +225,14 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: ListTile(
                           onTap: () {
                             showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return CustomDialogBox(
-                                    title: "Change App Language",
-                                    text: "OK",
-                                  );
-                                });
+                              context: context,
+                              builder: (BuildContext context) {
+                                return CustomDialogBox(
+                                  title: "Change App Language",
+                                  text: "OK",
+                                );
+                              },
+                            );
                           },
                           leading: Padding(
                             padding: EdgeInsets.only(left: 10),
