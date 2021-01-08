@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pulsooth_mobile/ui/auth-components/signup-page.dart';
 import 'package:pulsooth_mobile/ui/home-components/dashboard-page.dart';
 import 'package:pulsooth_mobile/ui/home-components/products-page.dart';
 import 'package:pulsooth_mobile/ui/home-components/profile-page.dart';
 import 'package:pulsooth_mobile/ui/product-components/bag-page.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class HomePage extends StatefulWidget {
   @override
@@ -66,9 +70,12 @@ class _HomePageState extends State<HomePage>
         case 2:
           setState(() {
             _shouldBeExtended = true;
-            bagColor = Colors.white;
-            _title = 'Imran Hajiyev';
-            titleColor = Colors.white;
+            bagColor = _auth.currentUser != null ? Colors.white : Colors.black;
+            _title = _auth.currentUser != null
+                ? _auth.currentUser.displayName
+                : 'My Profile';
+            titleColor =
+                _auth.currentUser != null ? Colors.white : Colors.black;
             backgroundColor = Colors.transparent;
             homeIcon = Icon(SimpleLineIcons.layers);
             samplesIcon = Icon(SimpleLineIcons.basket);
@@ -112,7 +119,9 @@ class _HomePageState extends State<HomePage>
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BagPage(),
+                      builder: (context) => _auth.currentUser == null
+                          ? SignUpPage(toSignUp: true)
+                          : BagPage(),
                     ),
                   );
                 },
@@ -127,7 +136,19 @@ class _HomePageState extends State<HomePage>
         body: TabBarView(
           controller: _tabController,
           physics: NeverScrollableScrollPhysics(),
-          children: [DashboardPage(), ProductsPage(), ProfilePage()],
+          children: [
+            DashboardPage(
+              authObject: _auth.currentUser,
+            ),
+            ProductsPage(
+              authObject: _auth.currentUser,
+            ),
+            _auth.currentUser != null
+                ? ProfilePage(
+                    authObject: _auth,
+                  )
+                : SignUpPage(toSignUp: false)
+          ],
         ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(

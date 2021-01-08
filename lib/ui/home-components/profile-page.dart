@@ -8,11 +8,11 @@ import 'package:pulsooth_mobile/ui/profile-components/contact-delivery-page.dart
 import 'package:pulsooth_mobile/ui/profile-components/my-orders-page.dart';
 import 'package:pulsooth_mobile/ui/profile-components/news-page.dart';
 
-final FirebaseAuth _auth = FirebaseAuth.instance;
-
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
+  final authObject;
+  ProfilePage({Key key, this.authObject}) : super(key: key);
 }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -276,7 +276,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     padding: EdgeInsets.only(top: 10, bottom: 10),
                     child: ListTile(
                       onTap: () async {
-                        final User user = _auth.currentUser;
+                        final User user = widget.authObject.currentUser;
                         if (user == null) {
                           Scaffold.of(context).showSnackBar(
                             const SnackBar(
@@ -293,7 +293,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Text(uid + ' has successfully signed out.'),
                           ),
                         );
-                        Navigator.pop(context);
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
                       },
                       leading: Padding(
                         padding: EdgeInsets.only(left: 10),
@@ -327,7 +328,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _signOut() async {
-    await _auth.signOut();
+    await widget.authObject.signOut();
   }
 }
 

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pulsooth_mobile/ui/auth-components/signup-page.dart';
 import 'package:pulsooth_mobile/ui/product-components/product-page.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
   _DashboardPageState createState() => _DashboardPageState();
+  final authObject;
+  DashboardPage({Key key, this.authObject}) : super(key: key);
 }
 
 class _DashboardPageState extends State<DashboardPage> {
@@ -90,7 +93,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ProductPage(),
+                                    builder: (context) => ProductPage(
+                                        authObject: widget.authObject),
                                   ),
                                 );
                               },
@@ -124,52 +128,66 @@ class _DashboardPageState extends State<DashboardPage> {
                   Text('November 21, 2020 - December 22, 2020'),
                   SizedBox(height: 10),
                   for (var i = 0; i < 2; i++)
-                    Container(
-                      margin: EdgeInsets.only(top: 15),
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height / 8,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(0.0, 1.0),
-                            blurRadius: 10,
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Image(
-                                image: AssetImage('lib/assets/iphone12.png'),
+                    GestureDetector(
+                      onTap: () {
+                        widget.authObject != null
+                            ? null
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      SignUpPage(toSignUp: true),
+                                ),
+                              );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(top: 15),
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height / 8,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0.0, 1.0),
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Image(
+                                  image: AssetImage('lib/assets/iphone12.png'),
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            color: Colors.grey.withOpacity(0.4),
-                            width: 1,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'iPhone 12',
-                                  style: TextStyle(fontWeight: FontWeight.w800),
-                                ),
-                                Text('10 people drew',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w800,
-                                        color: Colors.black.withOpacity(0.4)))
-                              ],
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 10),
+                              color: Colors.grey.withOpacity(0.4),
+                              width: 1,
                             ),
-                          )
-                        ],
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'iPhone 12',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w800),
+                                  ),
+                                  Text('10 people drew',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w800,
+                                          color: Colors.black.withOpacity(0.4)))
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                 ],

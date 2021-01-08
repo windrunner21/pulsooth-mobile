@@ -187,7 +187,9 @@ class _SignInPageState extends State<SignInPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SignUpPage(),
+                            builder: (context) => SignUpPage(
+                              toSignUp: true,
+                            ),
                           ),
                         );
                       },

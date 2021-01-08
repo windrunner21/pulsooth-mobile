@@ -1,11 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pulsooth_mobile/ui/auth-components/signup-page.dart';
 import 'package:pulsooth_mobile/ui/product-components/bag-page.dart';
 
 class ProductPage extends StatefulWidget {
   @override
   _ProductPageState createState() => _ProductPageState();
+  final authObject;
+  ProductPage({Key key, this.authObject}) : super(key: key);
 }
 
 class _ProductPageState extends State<ProductPage> {
@@ -26,7 +29,9 @@ class _ProductPageState extends State<ProductPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BagPage(),
+                    builder: (context) => widget.authObject == null
+                        ? SignUpPage(toSignUp: true)
+                        : BagPage(),
                   ),
                 );
               },
@@ -156,12 +161,17 @@ class _ProductPageState extends State<ProductPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => BagPage(),
+                                  builder: (context) =>
+                                      widget.authObject == null
+                                          ? SignUpPage(toSignUp: true)
+                                          : BagPage(),
                                 ),
                               );
                             },
                             child: Text(
-                              "Add to Bag",
+                              widget.authObject == null
+                                  ? "Register to Order"
+                                  : "Add to Bag",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,

@@ -4,6 +4,8 @@ import 'package:pulsooth_mobile/ui/product-components/product-page.dart';
 class ProductsPage extends StatefulWidget {
   @override
   _ProductsPageState createState() => _ProductsPageState();
+  final authObject;
+  ProductsPage({Key key, this.authObject}) : super(key: key);
 }
 
 class _ProductsPageState extends State<ProductsPage> {
@@ -20,7 +22,8 @@ class _ProductsPageState extends State<ProductsPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProductPage(),
+                  builder: (context) =>
+                      ProductPage(authObject: widget.authObject),
                 ),
               );
             },

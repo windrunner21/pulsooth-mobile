@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:pulsooth_mobile/classes/phone-number-formatter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:pulsooth_mobile/ui/home-components/home-page.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -12,6 +11,8 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => _SignUpPageState();
+  final toSignUp;
+  SignUpPage({Key key, this.toSignUp}) : super(key: key);
 }
 
 class _SignUpPageState extends State<SignUpPage> {
@@ -107,19 +108,24 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Color(0xFFF6F6F9),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: Color(0xFF5B70D9),
-        ),
-      ),
+      appBar: widget.toSignUp
+          ? AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              iconTheme: IconThemeData(
+                color: Color(0xFF5B70D9),
+              ),
+            )
+          : null,
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: widget.toSignUp
+                ? MainAxisAlignment.start
+                : MainAxisAlignment.center,
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -347,12 +353,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               );
 
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomePage(),
-                ),
-              );
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomePage(),
+                  ),
+                  (route) => route.isFirst);
             }).catchError((error) {
               user.user.delete();
             });
