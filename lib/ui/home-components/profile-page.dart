@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:pulsooth_mobile/classes/custom-dialog.dart';
+import 'package:pulsooth_mobile/classes/language-dialog.dart';
 import 'package:pulsooth_mobile/ui/auth-components/launch-page.dart';
 import 'package:pulsooth_mobile/ui/profile-components/about-me-page.dart';
 import 'package:pulsooth_mobile/ui/profile-components/contact-delivery-page.dart';
@@ -228,7 +228,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
-                                return CustomDialogBox(
+                                return LanguageDialog(
                                   title: "Change App Language",
                                   text: "OK",
                                 );

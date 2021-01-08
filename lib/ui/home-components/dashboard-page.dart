@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pulsooth_mobile/classes/giveaway-dialog.dart';
 import 'package:pulsooth_mobile/ui/auth-components/signup-page.dart';
 import 'package:pulsooth_mobile/ui/product-components/product-page.dart';
 
@@ -131,7 +132,18 @@ class _DashboardPageState extends State<DashboardPage> {
                     GestureDetector(
                       onTap: () {
                         widget.authObject != null
-                            ? null
+                            ? showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return GiveawayDialog(
+                                    title: "iPhone 12 Coupon",
+                                    descriptions:
+                                        'You are about to draw your coupon. Are you sure?',
+                                    no: 'No',
+                                    yes: 'Yes',
+                                  );
+                                },
+                              )
                             : Navigator.push(
                                 context,
                                 MaterialPageRoute(

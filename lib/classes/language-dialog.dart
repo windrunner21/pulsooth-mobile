@@ -2,19 +2,19 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CustomDialogBox extends StatefulWidget {
+class LanguageDialog extends StatefulWidget {
   final String title, descriptions, text;
   final Image img;
 
-  const CustomDialogBox(
+  const LanguageDialog(
       {Key key, this.title, this.descriptions, this.text, this.img})
       : super(key: key);
 
   @override
-  _CustomDialogBoxState createState() => _CustomDialogBoxState();
+  _LanguageDialogState createState() => _LanguageDialogState();
 }
 
-class _CustomDialogBoxState extends State<CustomDialogBox> {
+class _LanguageDialogState extends State<LanguageDialog> {
   static const double padding = 20;
   static const double avatarRadius = 45;
   bool _azeri = false;
