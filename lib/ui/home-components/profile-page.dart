@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pulsooth_mobile/classes/custom-dialog.dart';
+import 'package:pulsooth_mobile/ui/auth-components/launch-page.dart';
 import 'package:pulsooth_mobile/ui/profile-components/about-me-page.dart';
 import 'package:pulsooth_mobile/ui/profile-components/contact-delivery-page.dart';
 import 'package:pulsooth_mobile/ui/profile-components/my-orders-page.dart';
@@ -293,8 +294,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Text(uid + ' has successfully signed out.'),
                           ),
                         );
-                        Navigator.of(context)
-                            .popUntil((route) => route.isFirst);
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => LaunchPage(),
+                          ),
+                        );
                       },
                       leading: Padding(
                         padding: EdgeInsets.only(left: 10),

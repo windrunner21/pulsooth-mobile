@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pulsooth_mobile/ui/auth-components/launch-page.dart';
+import 'package:pulsooth_mobile/ui/home-components/home-page.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class LandingPage extends StatefulWidget {
   @override
@@ -18,7 +22,8 @@ class _LandingPageState extends State<LandingPage> {
       Duration(seconds: 2),
       () => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (BuildContext context) => LaunchPage(),
+          builder: (BuildContext context) =>
+              _auth.currentUser != null ? HomePage() : LaunchPage(),
         ),
       ),
     );

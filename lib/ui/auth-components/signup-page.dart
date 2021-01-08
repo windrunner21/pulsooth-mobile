@@ -358,7 +358,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   MaterialPageRoute(
                     builder: (context) => HomePage(),
                   ),
-                  (route) => route.isFirst);
+                  (route) => false);
             }).catchError((error) {
               user.user.delete();
             });
@@ -612,12 +612,12 @@ class _SignUpPageState extends State<SignUpPage> {
                                         },
                                       );
 
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => HomePage(),
-                                        ),
-                                      );
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => HomePage(),
+                                          ),
+                                          (route) => false);
                                     },
                                   ).catchError(
                                     (error) {

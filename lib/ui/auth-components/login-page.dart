@@ -226,12 +226,12 @@ class _SignInPageState extends State<SignInPage> {
         ),
       );
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ),
+          (route) => false);
     } catch (e) {
       _scaffoldKey.currentState.showSnackBar(
         SnackBar(
