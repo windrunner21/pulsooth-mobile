@@ -7,7 +7,8 @@ class DashboardPage extends StatefulWidget {
   @override
   _DashboardPageState createState() => _DashboardPageState();
   final authObject;
-  DashboardPage({Key key, this.authObject}) : super(key: key);
+  final future;
+  DashboardPage({Key key, this.authObject, this.future}) : super(key: key);
 }
 
 class _DashboardPageState extends State<DashboardPage> {
@@ -56,8 +57,19 @@ class _DashboardPageState extends State<DashboardPage> {
                       child: Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Image(
-                          image: AssetImage('lib/assets/test.png'),
+                        child: FutureBuilder(
+                          future: widget.future,
+                          builder: (context, snapshot) {
+                            if (ConnectionState.done ==
+                                snapshot.connectionState) {
+                              return Image.network(
+                                'https://pulsooth.az/' +
+                                    snapshot.data.itemsList.items[0].image,
+                              );
+                            } else {
+                              return SizedBox();
+                            }
+                          },
                         ),
                       ),
                     ),
@@ -69,13 +81,41 @@ class _DashboardPageState extends State<DashboardPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Brought to you'),
-                            Text(
-                              'Meal for Events',
-                              style: TextStyle(
-                                  fontSize: 24, fontWeight: FontWeight.bold),
+                            FutureBuilder(
+                              future: widget.future,
+                              builder: (context, snapshot) {
+                                if (ConnectionState.done ==
+                                    snapshot.connectionState) {
+                                  return Text(
+                                    snapshot.data.itemsList.items[0].name,
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold),
+                                  );
+                                } else {
+                                  return Text(
+                                    'Loading',
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold),
+                                  );
+                                }
+                              },
                             ),
                             SizedBox(height: 10),
-                            Text('by Taste Technology'),
+                            FutureBuilder(
+                              future: widget.future,
+                              builder: (context, snapshot) {
+                                if (ConnectionState.done ==
+                                    snapshot.connectionState) {
+                                  return Text('by ' +
+                                      snapshot
+                                          .data.itemsList.items[0].brandName);
+                                } else {
+                                  return Text('Loading');
+                                }
+                              },
+                            ),
                           ],
                         ),
                         ClipOval(

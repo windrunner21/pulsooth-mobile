@@ -1,7 +1,10 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pulsooth_mobile/models/data-model.dart';
 import 'package:pulsooth_mobile/ui/auth-components/signup-page.dart';
 import 'package:pulsooth_mobile/ui/home-components/dashboard-page.dart';
 import 'package:pulsooth_mobile/ui/home-components/products-page.dart';
@@ -17,6 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  var _future;
   // icons
   Icon homeIcon = Icon(SimpleLineIcons.grid);
   Icon samplesIcon = Icon(SimpleLineIcons.basket);
@@ -36,6 +40,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
+    _future = getData();
     _tabController = TabController(vsync: this, length: 3);
     _tabController.addListener(_handleTabSelection);
   }
@@ -139,6 +144,7 @@ class _HomePageState extends State<HomePage>
           children: [
             DashboardPage(
               authObject: _auth.currentUser,
+              future: _future,
             ),
             ProductsPage(
               authObject: _auth.currentUser,
@@ -185,5 +191,20 @@ class _HomePageState extends State<HomePage>
         ),
       ),
     );
+  }
+
+  Future<DataModel> getData() async {
+    var url = 'https://pulsooth.az/api/home/getData';
+
+    Map data = {'lang': 'en', 'fid': _auth.currentUser.uid};
+
+    var body = json.encode(data);
+    var response = await http.post(url,
+        headers: {"Content-Type": "application/json"}, body: body);
+
+    Map dataMap = jsonDecode(response.body);
+    var datamodel = DataModel.fromJson(dataMap);
+
+    return datamodel;
   }
 }

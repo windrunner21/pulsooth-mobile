@@ -599,6 +599,10 @@ class _SignUpPageState extends State<SignUpPage> {
                                           .then(
                                             (value) => http.post(
                                               'https://pulsooth.az/api/auth/createUser',
+                                              headers: <String, String>{
+                                                'Content-Type':
+                                                    'application/json; charset=UTF-8',
+                                              },
                                               body: jsonEncode(
                                                 <String, String>{
                                                   'f_id': user.user.uid
