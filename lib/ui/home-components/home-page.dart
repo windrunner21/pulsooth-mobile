@@ -148,6 +148,7 @@ class _HomePageState extends State<HomePage>
             ),
             ProductsPage(
               authObject: _auth.currentUser,
+              future: _future,
             ),
             _auth.currentUser != null
                 ? ProfilePage(

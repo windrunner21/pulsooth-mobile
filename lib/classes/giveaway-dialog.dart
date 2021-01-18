@@ -3,8 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class GiveawayDialog extends StatefulWidget {
-  final String title, descriptions, no, yes;
-  final Image img;
+  final String title, descriptions, no, yes, img;
 
   const GiveawayDialog(
       {Key key, this.title, this.descriptions, this.no, this.yes, this.img})
@@ -111,13 +110,13 @@ class _GiveawayDialogState extends State<GiveawayDialog> {
             backgroundColor: Colors.white,
             radius: avatarRadius,
             child: Padding(
-              padding: EdgeInsets.all(5.0),
+              padding: EdgeInsets.all(15.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.all(
                   Radius.circular(100),
                 ),
-                child: Image.asset(
-                  "lib/assets/iphone12.png",
+                child: Image.network(
+                  'https://pulsooth.az/' + widget.img,
                 ),
               ),
             ),

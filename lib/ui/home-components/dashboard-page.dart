@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pulsooth_mobile/classes/giveaway-dialog.dart';
 import 'package:pulsooth_mobile/ui/auth-components/signup-page.dart';
 import 'package:pulsooth_mobile/ui/product-components/product-page.dart';
@@ -165,83 +166,158 @@ class _DashboardPageState extends State<DashboardPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  //Text('No giveaways are now in progress.'),
-                  Text('November 21, 2020 - December 22, 2020'),
+                  FutureBuilder(
+                    future: widget.future,
+                    builder: (context, snapshot) {
+                      if (ConnectionState.done == snapshot.connectionState) {
+                        if (snapshot.data.giveawayList.giveaways.length > 0) {
+                          // overall format
+                          DateFormat format = new DateFormat("MMMM dd, yyyy");
+
+                          // date times - start and end
+                          DateTime startDateTime = DateTime.parse(snapshot
+                              .data.giveawayList.giveaways[0].startDate);
+                          DateTime endDateTime = DateTime.parse(
+                              snapshot.data.giveawayList.giveaways[0].endDate);
+
+                          // formatted strings
+                          String formatStartDate = format.format(startDateTime);
+                          String formatEndDate = format.format(endDateTime);
+
+                          return Text(formatStartDate + ' - ' + formatEndDate);
+                        } else {
+                          return Text('No giveaways are now in progress.');
+                        }
+                      } else {
+                        return Text('Loading');
+                      }
+                    },
+                  ),
                   SizedBox(height: 10),
-                  for (var i = 0; i < 2; i++)
-                    GestureDetector(
-                      onTap: () {
-                        widget.authObject != null
-                            ? showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return GiveawayDialog(
-                                    title: "iPhone 12 Coupon",
-                                    descriptions:
-                                        'You are about to draw your coupon. Are you sure?',
-                                    no: 'No',
-                                    yes: 'Yes',
-                                  );
-                                },
-                              )
-                            : Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      SignUpPage(toSignUp: true),
-                                ),
-                              );
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(top: 15),
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height / 8,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0.0, 1.0),
-                              blurRadius: 10,
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Image(
-                                  image: AssetImage('lib/assets/iphone12.png'),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(vertical: 10),
-                              color: Colors.grey.withOpacity(0.4),
-                              width: 1,
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'iPhone 12',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w800),
+                  FutureBuilder(
+                    future: widget.future,
+                    builder: (context, snapshot) {
+                      if (ConnectionState.done == snapshot.connectionState) {
+                        if (snapshot.data.giveawayList.giveaways.length > 0) {
+                          return Column(
+                            children: [
+                              for (var i = 0;
+                                  i <
+                                      snapshot
+                                          .data.giveawayList.giveaways.length;
+                                  i++)
+                                GestureDetector(
+                                  onTap: () {
+                                    widget.authObject != null
+                                        ? showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return GiveawayDialog(
+                                                title: snapshot
+                                                        .data
+                                                        .giveawayList
+                                                        .giveaways[i]
+                                                        .name +
+                                                    " Coupon",
+                                                descriptions:
+                                                    'You are about to draw your coupon. Are you sure?',
+                                                no: 'No',
+                                                yes: 'Yes',
+                                                img: snapshot.data.giveawayList
+                                                    .giveaways[i].image,
+                                              );
+                                            },
+                                          )
+                                        : Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SignUpPage(toSignUp: true),
+                                            ),
+                                          );
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.only(top: 15),
+                                    width: double.infinity,
+                                    height:
+                                        MediaQuery.of(context).size.height / 8,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0.0, 1.0),
+                                          blurRadius: 10,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Image.network(
+                                              'https://pulsooth.az/' +
+                                                  snapshot.data.giveawayList
+                                                      .giveaways[i].image,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 10),
+                                          color: Colors.grey.withOpacity(0.4),
+                                          width: 1,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                snapshot.data.giveawayList
+                                                    .giveaways[i].name,
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w800),
+                                              ),
+                                              Text(
+                                                snapshot
+                                                        .data
+                                                        .giveawayList
+                                                        .giveaways[i]
+                                                        .drawsNumber
+                                                        .toString() +
+                                                    ' people drew',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w800,
+                                                  color: Colors.black
+                                                      .withOpacity(0.4),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                  Text('10 people drew',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w800,
-                                          color: Colors.black.withOpacity(0.4)))
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                                )
+                            ],
+                          );
+                        } else {
+                          return SizedBox();
+                        }
+                      } else {
+                        return Center(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 50),
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
